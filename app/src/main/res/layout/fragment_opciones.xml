@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_naranja_gradient">
+
+    <Button
+        android:id="@+id/btn_volver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:text="@string/botonVolver"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:background="@android:color/transparent"/>
+
+    <View
+        android:layout_width="250dp"
+        android:layout_height="2dp"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btn_ayuda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/botonAyuda"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:background="@android:color/transparent" />
+
+    <View
+        android:layout_width="250dp"
+        android:layout_height="2dp"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btn_promociones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/promociones"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:background="@android:color/transparent" />
+
+    <View
+        android:layout_width="250dp"
+        android:layout_height="2dp"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btn_configuracion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/botonConfiguracion"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:background="@android:color/transparent" />
+
+    <View
+        android:layout_width="250dp"
+        android:layout_height="2dp"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btn_cerrar_sesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/botonCerrarSesion"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:background="@android:color/transparent" />
+
+</LinearLayout>
