@@ -23,7 +23,7 @@
     <string name="caro">$$$</string>
     <string name="muyCaro">$$$$</string>
     <string name="botonDetalleLugar">Detalles</string>
-    <string name="hint_nombre_de_usuario">Nombre de usuario</string>
+    <string name="hint_nombre_de_usuario">Email</string>
     <string name="hint_contrasenia">Contraseña</string>
     <string name="olvidaste_contrasenia">¿Olvidaste tu contraseña?</string>
     <string name="no_tienes_cuenta">¿No tienes una cuenta?</string>

@@ -1,12 +1,22 @@
 package lopez.marco.pruebabottomnav
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.edit
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.FirebaseApp
+import com.google.firebase.ktx.Firebase
 import lopez.marco.proyectoeterem.FragmentInicio
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,6 +34,9 @@ class FragmentInicioSesion : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var auth: FirebaseAuth
+//    private lateinit var binding: FragmentInicioSesion
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -36,18 +49,41 @@ class FragmentInicioSesion : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+
         var inicio = FragmentInicio()
         var registrarUsuario=FragmentRegistrarUsuario()
 
         val myFragmentView: View? = inflater.inflate(R.layout.fragment_inicio_sesion, container, false)
+
         val btn_iniciar_sesion: AppCompatButton = myFragmentView!!.findViewById(R.id.btn_iniciar_sesion)
         val btn_registrar_sesion: TextView = myFragmentView!!.findViewById(R.id.text_registrar)
+
+
         btn_iniciar_sesion.setOnClickListener{
             loadFragment(inicio)
+//            val email = myFragmentView.findViewById<EditText>(R.id.et_email).text.toString()
+//            val contrasenia = myFragmentView.findViewById<EditText>(R.id.et_password).text.toString()
+//            Toast.makeText(activity, "Iniciando sesión...", Toast.LENGTH_SHORT).show()
+//            when{
+//                email.isEmpty() -> {
+//                    myFragmentView.findViewById<EditText>(R.id.et_email).error="Email requerido"
+//                    myFragmentView.findViewById<EditText>(R.id.et_email).requestFocus()
+//                }
+//                contrasenia.isEmpty() -> {
+//                    myFragmentView.findViewById<EditText>(R.id.et_password).error="Contraseña requerido"
+//                    myFragmentView.findViewById<EditText>(R.id.et_password).requestFocus()
+//                }
+//                else -> {
+//                    signIn(email, contrasenia)
+//                }
+//            }
         }
+
         btn_registrar_sesion.setOnClickListener{
             loadFragment(registrarUsuario)
         }
+
         return myFragmentView
     }
 
@@ -76,4 +112,33 @@ class FragmentInicioSesion : Fragment() {
         transaction.replace(R.id.frame_container, fragment)
         transaction.commit()
     }
+
+    private fun signIn(email:String, password:String){
+        var inicio = FragmentInicio()
+        activity?.let {
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(it) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success
+                    Log.d("TAG", "signInWithEmail:success")
+                    //Get user data
+                    val user = auth.currentUser
+                    val sharedPreferences = activity?.getSharedPreferences("user", AppCompatActivity.MODE_PRIVATE)
+                    val editor = sharedPreferences?.edit()
+                    //Add user data to local storage
+                    editor?.putString("email", email)
+                    editor?.putString("username", user?.displayName)
+                    editor?.apply()
+
+                    Toast.makeText(activity, "Authentication success.", Toast.LENGTH_SHORT).show()
+                    loadFragment(inicio)
+                } else {
+                    // Sign in failed
+                    Log.w("TAG", "signInWithEmail:failure", task.exception)
+                    Toast.makeText(activity, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                    // updateUI(null)
+                }
+            }
+        }
+    }
+
 }

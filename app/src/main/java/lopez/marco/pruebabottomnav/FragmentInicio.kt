@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
 import lopez.marco.pruebabottomnav.FragmentDetalleLugar
+import lopez.marco.pruebabottomnav.FragmentOpciones
 import lopez.marco.pruebabottomnav.FragmentPerfil
 import lopez.marco.pruebabottomnav.R
 
@@ -40,9 +41,11 @@ class FragmentInicio : Fragment() {
     ): View? {
         var detalle_lugar = FragmentDetalleLugar()
         var perfil = FragmentPerfil()
+        var opciones = FragmentOpciones()
         val myFragmentView: View? = inflater.inflate(R.layout.fragment_inicio, container, false)
         val btn_detalles_lugar: AppCompatButton = myFragmentView!!.findViewById(R.id.btn_detalle_lugar)
         val view_perfil: View = myFragmentView!!.findViewById(R.id.view_perfil)
+        val btn_opciones: View = myFragmentView!!.findViewById(R.id.view_opciones)
 
         btn_detalles_lugar.setOnClickListener{
             loadFragment(detalle_lugar)
@@ -50,6 +53,10 @@ class FragmentInicio : Fragment() {
 
         view_perfil.setOnClickListener{
             loadFragment(perfil)
+        }
+
+        btn_opciones.setOnClickListener{
+            loadFragment(opciones)
         }
 
         return myFragmentView
