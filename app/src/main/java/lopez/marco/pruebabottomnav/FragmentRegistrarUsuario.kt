@@ -36,7 +36,7 @@ class FragmentRegistrarUsuario : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var inicioSesion = FragmentInicioSesion()
+//        var inicioSesion = FragmentInicioSesion()
         var inicio =FragmentInicio()
 
         val myFragmentView: View? = inflater.inflate(R.layout.fragment_registrar_usuario, container, false)
@@ -46,7 +46,7 @@ class FragmentRegistrarUsuario : Fragment() {
             loadFragment(inicio)
         }
         text_tengo_cuenta.setOnClickListener{
-            loadFragment(inicioSesion)
+//            loadFragment(inicioSesion)
         }
         return myFragmentView
     }
