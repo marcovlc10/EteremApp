@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -26,6 +27,12 @@ class ActivityInicioSesion : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = Firebase.auth
+
+        binding.textRegistrar.setOnClickListener{
+            val intent = Intent(this, ActivityRegistroUsuario::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         binding.btnIniciarSesion.setOnClickListener {
             val email = binding.etEmail.text.toString()
@@ -73,10 +80,9 @@ class ActivityInicioSesion : AppCompatActivity() {
         }
     }
 
-    private fun reload() {
-        val inicio=FragmentInicio()
+    private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frame_container, inicio)
+        transaction.replace(R.id.frame_container, fragment)
         transaction.commit()
     }
 

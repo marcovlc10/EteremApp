@@ -12,6 +12,9 @@
         android:theme="@style/Theme.PruebaBottomNav"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityRegistroUsuario"
+            android:exported="false" />
+        <activity
             android:name=".MainActivityNav"
             android:exported="false" />
         <activity
