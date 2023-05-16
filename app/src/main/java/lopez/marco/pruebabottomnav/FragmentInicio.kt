@@ -37,8 +37,8 @@ class FragmentInicio : Fragment() {
     private var _binding: FragmentInicioBinding? = null
     private val binding get() = _binding!!
 //    private var adapter: AdaptadorLugares? = null
-    private lateinit var lugaresRecyclerview : RecyclerView
-    private lateinit var lugaresArrayList : ArrayList<Lugar>
+    //private lateinit var lugaresRecyclerview : RecyclerView
+    //private lateinit var lugaresArrayList : ArrayList<Lugar>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,11 +80,11 @@ class FragmentInicio : Fragment() {
         val view_perfil: View = myFragmentView!!.findViewById(R.id.view_perfil)
         val btn_opciones: View = myFragmentView!!.findViewById(R.id.view_opciones)
 
-        lugaresRecyclerview = myFragmentView!!.findViewById(R.id.lugaresList)
-        lugaresRecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        lugaresRecyclerview.setHasFixedSize(true)
+        //lugaresRecyclerview = myFragmentView!!.findViewById(R.id.lugaresList)
+        //lugaresRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+        //lugaresRecyclerview.setHasFixedSize(true)
 
-        lugaresArrayList = arrayListOf<Lugar>()
+        //lugaresArrayList = arrayListOf<Lugar>()
         //getUserData()
 
         imagen_detalles_lugar.setOnClickListener{
@@ -99,7 +99,7 @@ class FragmentInicio : Fragment() {
             loadFragment(opciones)
         }
 
-        return myFragmentView
+        return inflater.inflate(R.layout.fragment_inicio, container, false)
     }
 
     //private fun getUserData() {
@@ -147,9 +147,9 @@ class FragmentInicio : Fragment() {
             }
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = getParentFragmentManager().beginTransaction()
-        transaction.replace(R.id.frame_container, fragment)
-        transaction.commit()
-    }
+   private fun loadFragment(fragment: Fragment) {
+       val transaction = getParentFragmentManager().beginTransaction()
+       transaction.replace(R.id.frame_container, fragment)
+       transaction.commit()
+   }
 }

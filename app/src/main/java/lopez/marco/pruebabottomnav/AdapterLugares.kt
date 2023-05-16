@@ -25,7 +25,7 @@ class AdapterLugares : RecyclerView.Adapter<AdapterLugares.MyViewHolder>() {
 
         holder.descripcion.text=currentitem.descripcion
         holder.precio.text=currentitem.precio
-        holder.rating.rating=currentitem.valoracion
+        holder.rating.rating= currentitem.valoracion!!
         holder.ubicacion.text=currentitem.ubicacion
 
     }
@@ -36,7 +36,7 @@ class AdapterLugares : RecyclerView.Adapter<AdapterLugares.MyViewHolder>() {
 
     fun updateLugaresList(lugaresList: List<Lugar>){
         this.listaLugares.clear()
-        this.listaLugares.addAll(listaLugares)
+        this.listaLugares.addAll(lugaresList)
         notifyDataSetChanged()
     }
 
