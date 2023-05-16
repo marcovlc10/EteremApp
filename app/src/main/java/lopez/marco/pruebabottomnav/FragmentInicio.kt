@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.widget.AppCompatButton
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import lopez.marco.pruebabottomnav.*
@@ -18,6 +21,9 @@ import lopez.marco.pruebabottomnav.databinding.FragmentInicioBinding
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private lateinit var viewModel: lugarViewModel
+private lateinit var lugarRecyclerView: RecyclerView
+lateinit var adapter : AdapterLugares
 
 /**
  * A simple [Fragment] subclass.
@@ -42,6 +48,22 @@ class FragmentInicio : Fragment() {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lugarRecyclerView = view.findViewById(R.id.lugaresList)
+        lugarRecyclerView.layoutManager = LinearLayoutManager(context)
+        lugarRecyclerView.setHasFixedSize(true)
+        adapter = AdapterLugares()
+        lugarRecyclerView.adapter = adapter
+
+        viewModel = ViewModelProvider(this).get(lugarViewModel::class.java)
+
+        viewModel.allLugares.observe(viewLifecycleOwner, Observer {
+            adapter.updateLugaresList(it)
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,7 +85,7 @@ class FragmentInicio : Fragment() {
         lugaresRecyclerview.setHasFixedSize(true)
 
         lugaresArrayList = arrayListOf<Lugar>()
-        getUserData()
+        //getUserData()
 
         imagen_detalles_lugar.setOnClickListener{
             loadFragment(detalle_lugar)
@@ -80,28 +102,28 @@ class FragmentInicio : Fragment() {
         return myFragmentView
     }
 
-    private fun getUserData() {
-
-        lugaresArrayList.add(Lugar("Los tacos de las seis",
-            "Los tradicionales y mejores tacos dorados y al vapor de Ciudad Obregón, Sonora.",
-            "$",
-            4.5F,
-            "Antonio Caso 2449"))
-        lugaresArrayList.add(Lugar("Veranda food garden",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce porttitorlacus bibendum viverra sagittis..",
-            "$$",
-            4.0F,
-            "Antonio Caso 2449"))
-        lugaresArrayList.add(Lugar("Sushilito",
-            "A mi me enseñaron a mirar a todos como enemigos hasta que demuestren lo contrario no busco problemas pero " +
-                    "siempre tengo un plan o una manera de vencer a cualquier persona en caso de que se vuelva amenaza  ya observe " +
-                    "su comportamiento y debilidades",
-            "$$$",
-            4.0F,
-            "Antonio Caso 2449"))
-
-        lugaresRecyclerview.adapter = AdapterLugares(lugaresArrayList)
-    }
+    //private fun getUserData() {
+    //
+    //   lugaresArrayList.add(Lugar("Los tacos de las seis",
+    //       "Los tradicionales y mejores tacos dorados y al vapor de Ciudad Obregón, Sonora.",
+    //       "$",
+    //       4.5F,
+    //       "Antonio Caso 2449"))
+    //   lugaresArrayList.add(Lugar("Veranda food garden",
+    //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce porttitorlacus bibendum viverra sagittis..",
+    //       "$$",
+    //       4.0F,
+    //       "Antonio Caso 2449"))
+    //   lugaresArrayList.add(Lugar("Sushilito",
+    //       "A mi me enseñaron a mirar a todos como enemigos hasta que demuestren lo contrario no busco problemas pero " +
+    //               "siempre tengo un plan o una manera de vencer a cualquier persona en caso de que se vuelva amenaza  ya observe " +
+    //               "su comportamiento y debilidades",
+    //       "$$$",
+    //       4.0F,
+    //       "Antonio Caso 2449"))
+    //
+    //   lugaresRecyclerview.adapter = AdapterLugares(lugaresArrayList)
+    //
 
     companion object {
         var first = true

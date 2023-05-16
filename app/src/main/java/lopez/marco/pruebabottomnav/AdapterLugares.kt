@@ -7,7 +7,9 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class AdapterLugares (private val listaLugares : ArrayList<Lugar>) : RecyclerView.Adapter<AdapterLugares.MyViewHolder>() {
+class AdapterLugares : RecyclerView.Adapter<AdapterLugares.MyViewHolder>() {
+
+    private val listaLugares = ArrayList<Lugar>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
@@ -30,6 +32,12 @@ class AdapterLugares (private val listaLugares : ArrayList<Lugar>) : RecyclerVie
 
     override fun getItemCount(): Int {
         return listaLugares.size
+    }
+
+    fun updateLugaresList(lugaresList: List<Lugar>){
+        this.listaLugares.clear()
+        this.listaLugares.addAll(listaLugares)
+        notifyDataSetChanged()
     }
 
     class MyViewHolder(view : View) : RecyclerView.ViewHolder(view){
