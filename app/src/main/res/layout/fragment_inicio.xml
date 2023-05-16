@@ -64,13 +64,11 @@
             android:textColor="@color/black" />
     </LinearLayout>
 
-    <GridView
-        android:id="@+id/gridViewLugaresInicio"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lugaresList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:numColumns="1"
-        android:paddingHorizontal="20dp" />
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/view_lugar"/>
 
 <!--    <LinearLayout-->
 <!--        android:layout_width="match_parent"-->

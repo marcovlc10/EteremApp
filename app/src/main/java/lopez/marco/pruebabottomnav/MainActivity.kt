@@ -9,16 +9,15 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import lopez.marco.proyectoeterem.FragmentInicio
 import lopez.marco.proyectoeterem.FragmentSocial
+import lopez.marco.pruebabottomnav.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-//    var btn_detalle_lugar: View =findViewById(R.id.btn_detalle_lugar)
-//    var btn_detalle_regresar: View =findViewById(R.id.btn_detalle_regresar)
     var home = FragmentInicio()
     var promos = FragmentPromos()
     var social = FragmentSocial()
     var search = FragmentBusqueda()
-
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,25 +25,13 @@ class MainActivity : AppCompatActivity() {
 
         val navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-//        findViewById<View>(R.id.layout_iniciar_sesion).visibility=View.GONE
-//        val myFragmentView: View? = inflater.inflate(R.layout.activity_main, container, false)
-//        myFragmentView!!.visibility = View.GONE
-//
+
         Handler().postDelayed({
             val intent = Intent(this, ActivityInicioSesion::class.java)
             startActivity(intent)
             finish()
         }, 500)
 
-//        btn_detalle_lugar.setOnClickListener{
-//            var intento= Intent(this, FragmentDetalleLugar::class.java)
-//            this.startActivity(intento)
-//        }
-//
-//        btn_detalle_regresar.setOnClickListener{
-//            var intento= Intent(this, FragmentInicio::class.java)
-//            this.startActivity(intento)
-//        }
     }
 
     private val mOnNavigationItemSelectedListener =
