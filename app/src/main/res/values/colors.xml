@@ -19,5 +19,6 @@
     <color name="green_light">#e3e4e5</color>
     <color name="green_light_2">#e3e4e5</color>
     <color name="transparent">#00E3E4E5</color>
+    <color name="rating_yellow">#ff9900</color>
 
 </resources>
