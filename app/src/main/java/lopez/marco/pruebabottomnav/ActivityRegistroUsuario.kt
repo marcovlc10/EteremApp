@@ -35,25 +35,20 @@ class ActivityRegistroUsuario : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email.text.toString(), contrasenia.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {3
-                        //
                         val user = auth.currentUser
                         //Set user display name
                         val profileUpdates = UserProfileChangeRequest.Builder()
                             .setDisplayName(usuario.text.toString())
                             .build()
-
                         user?.updateProfile(profileUpdates)
 
                         val sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
                         val editor = sharedPreferences.edit()
+
                         //Add user data to local storage
                         editor.putString("email", email.text.toString())
                         editor.putString("username", usuario.text.toString())
                         editor.apply()
-                        // Sign in success, go to the next activity
-//                        val intent = Intent(this, EventosActivity::class.java)
-//                        startActivity(intent)
-//                        finish()
                         Toast.makeText(baseContext, "Registro exitoso, bienvenido",
                             Toast.LENGTH_LONG).show()
                         reload2()
@@ -63,10 +58,8 @@ class ActivityRegistroUsuario : AppCompatActivity() {
                             Toast.LENGTH_SHORT).show()
                     }
                 }
-
-                reload2()
-
-            }
+            reload2()
+        }
 
             text_iniciar_sesion.setOnClickListener {
                 val intent = Intent(this, ActivityInicioSesion::class.java)

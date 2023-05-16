@@ -23,7 +23,7 @@ class AdapterLugares (private val listaLugares : ArrayList<Lugar>) : RecyclerVie
 
         holder.descripcion.text=currentitem.descripcion
         holder.precio.text=currentitem.precio
-        holder.rating.rating=currentitem.valoracion
+        holder.rating.rating= currentitem.valoracion.toFloat()
         holder.ubicacion.text=currentitem.ubicacion
 
     }

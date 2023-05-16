@@ -46,28 +46,36 @@
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="25dp"
             android:text="@string/tu_estas_aqui"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textColor="@color/black" />
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_height="35dp"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="25dp"
-            android:text="@string/ubicacion"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textColor="@color/black" />
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_location"/>
+            <TextView
+                android:id="@+id/text_ubicacion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Antonio Caso 2449"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lugaresList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="65dp"
         tools:listitem="@layout/view_lugar"/>
 
 <!--    <LinearLayout-->
