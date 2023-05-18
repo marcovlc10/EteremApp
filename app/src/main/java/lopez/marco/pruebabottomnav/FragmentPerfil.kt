@@ -6,7 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import lopez.marco.proyectoeterem.FragmentInicio
+import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +29,9 @@ class FragmentPerfil : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    val currentUser = FirebaseAuth.getInstance().currentUser
+    val uid = currentUser?.uid
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +49,20 @@ class FragmentPerfil : Fragment() {
         val myFragmentView: View? = inflater.inflate(R.layout.fragment_perfil, container, false)
         val btn_regresar: ImageView = myFragmentView!!.findViewById(R.id.btn_perfil_regresar)
         val btn_logo: ImageView = myFragmentView!!.findViewById(R.id.logo)
+        val text_usuario: TextView = myFragmentView!!.findViewById(R.id.text_nombre_usuario)
+
+        val databaseRef = FirebaseDatabase.getInstance().reference.child("Users").child(uid.toString())
+        databaseRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val username = snapshot.child("usuario").value.toString()
+                    text_usuario.text=username
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // Manejar el error en caso de que ocurra
+            }
+        })
 
         btn_logo.setOnClickListener{
             loadFragment(home)

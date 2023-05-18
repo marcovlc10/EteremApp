@@ -38,17 +38,19 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="10dp">
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/buscador"
-            android:layout_marginRight="8dp"/>
-        <EditText
-            android:layout_width="310dp"
+
+        <SearchView
+            android:id="@+id/search_bar_busqueda"
+            android:layout_width="360dp"
             android:layout_height="45dp"
             android:hint="Tacos, pizza, sushi..."
-            android:background="@drawable/custom_edit_text"
-            android:paddingLeft="15dp"/>
+            android:background="@drawable/custom_edit_text" />
     </LinearLayout>
+    <ListView
+        android:id="@+id/list_view_busqueda"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/search_bar_busqueda" />
 
 </LinearLayout>

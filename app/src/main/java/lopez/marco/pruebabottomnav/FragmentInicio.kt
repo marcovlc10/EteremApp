@@ -3,6 +3,7 @@ package lopez.marco.proyectoeterem
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import lopez.marco.pruebabottomnav.*
 import lopez.marco.pruebabottomnav.R
-import lopez.marco.pruebabottomnav.databinding.FragmentInicioBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,13 +35,14 @@ class FragmentInicio : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var _binding: FragmentInicioBinding? = null
-    private val binding get() = _binding!!
+//    private var _binding: FragmentInicioBinding? = null
+//    private val binding get() = _binding!!
 //    private var adapter: AdaptadorLugares? = null
     private lateinit var lugaresRecyclerview : RecyclerView
     private lateinit var lugaresArrayList : ArrayList<Lugar>
     private lateinit var dbref : DatabaseReference
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
+    private val storage = FirebaseStorage.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +73,7 @@ class FragmentInicio : Fragment() {
         lugaresRecyclerview.setHasFixedSize(true)
 
         lugaresArrayList = arrayListOf<Lugar>()
-        getUserData()
+        getLugarData()
 
         imagen_detalles_lugar.setOnClickListener{
             loadFragment(detalle_lugar)
@@ -88,7 +90,7 @@ class FragmentInicio : Fragment() {
         return myFragmentView
     }
 
-    private fun getUserData() {
+    private fun getLugarData() {
         db.collection("Restaurante")
             .get()
             .addOnSuccessListener { result ->
@@ -98,56 +100,17 @@ class FragmentInicio : Fragment() {
                     var precio=document.get("precio").toString()
                     var ubicacion=document.get("ubicacion").toString()
                     var valoracion=document.get("valoracion").toString()
-                    var lugar=Lugar(nombre,descripcion,precio, valoracion,ubicacion)
-                    println(lugar)
+                    var imagen= document.get("imagen").toString()
+
+                    var lugar=Lugar(nombre,descripcion,precio, valoracion,ubicacion, imagen)
+//                    println(lugar)
                     lugaresArrayList.add(lugar!!)
                 }
                 lugaresRecyclerview.adapter = AdapterLugares(lugaresArrayList)
-//                println("hola5")
-//                println(lugaresArrayList.toString())
             }
             .addOnFailureListener { exception ->
-                Log.d(TAG, "Error getting documents: ", exception)
+                Log.d(TAG, "Error al obtener los datos: ", exception)
             }
-
-
-//        dbref = FirebaseDatabase.getInstance().getReference("Restaurante")
-//
-//        dbref.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                if (snapshot.exists()){
-//                    for (lugarSnapshot in snapshot.children){
-//                        val lugar = lugarSnapshot.getValue(Lugar::class.java)
-//                        lugaresArrayList.add(lugar!!)
-//                    }
-//                    println(lugaresArrayList.toString())
-//                    lugaresRecyclerview.adapter = AdapterLugares(lugaresArrayList)
-//                }
-//            }
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//        })
-
-//        lugaresArrayList.add(Lugar("Los tacos de las seis",
-//            "Los tradicionales y mejores tacos dorados y al vapor de Ciudad Obregón, Sonora.",
-//            "$",
-//            4.5F,
-//            "Antonio Caso 2449"))
-//        lugaresArrayList.add(Lugar("Veranda food garden",
-//            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce porttitorlacus bibendum viverra sagittis..",
-//            "$$",
-//            4.0F,
-//            "Antonio Caso 2449"))
-//        lugaresArrayList.add(Lugar("Sushilito",
-//            "A mi me enseñaron a mirar a todos como enemigos hasta que demuestren lo contrario no busco problemas pero " +
-//                    "siempre tengo un plan o una manera de vencer a cualquier persona en caso de que se vuelva amenaza  ya observe " +
-//                    "su comportamiento y debilidades",
-//            "$$$",
-//            4.0F,
-//            "Antonio Caso 2449"))
-//
-//        lugaresRecyclerview.adapter = AdapterLugares(lugaresArrayList)
     }
 
     companion object {

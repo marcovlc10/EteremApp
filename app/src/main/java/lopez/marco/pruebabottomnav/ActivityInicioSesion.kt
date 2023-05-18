@@ -35,23 +35,25 @@ class ActivityInicioSesion : AppCompatActivity() {
         }
 
         binding.btnIniciarSesion.setOnClickListener {
-            reload2()
-//            val email = binding.etEmail.text.toString()
-//            val password = binding.etPassword.text.toString()
-//            Toast.makeText(this, "Iniciando sesión...", Toast.LENGTH_SHORT).show()
-//            when{
-//                email.isEmpty() -> {
-//                    binding.etEmail.error = "Introduzca un correo válido"
-//                    binding.etEmail.requestFocus()
-//                }
-//                password.isEmpty() -> {
-//                    binding.etPassword.error = "Se requiere de una contraseña"
-//                    binding.etPassword.requestFocus()
-//                }
-//                else -> {
-//                    signIn(email, password)
-//                }
-//            }
+//            reload2()
+
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            Toast.makeText(this, "Iniciando sesión...", Toast.LENGTH_SHORT).show()
+            when{
+                email.isEmpty() -> {
+                    binding.etEmail.error = "Introduzca un correo válido"
+                    binding.etEmail.requestFocus()
+                }
+                password.isEmpty() -> {
+                    binding.etPassword.error = "Se requiere de una contraseña"
+                    binding.etPassword.requestFocus()
+                }
+                else -> {
+                    signIn(email, password)
+                }
+            }
+
         }
 
     }

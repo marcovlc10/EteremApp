@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import lopez.marco.pruebabottomnav.FragmentAgregarPublicacion
 import lopez.marco.pruebabottomnav.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,12 +39,20 @@ class FragmentSocial : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var home = FragmentInicio()
+        var agrega_publicacion = FragmentAgregarPublicacion()
         // Inflate the layout for this fragment
         val myFragmentView: View? = inflater.inflate(R.layout.fragment_social, container, false)
         val btn_logo: ImageView = myFragmentView!!.findViewById(R.id.logo)
+        val btn_agregar_publicacion: Button = myFragmentView!!.findViewById(R.id.btn_agregar_publicacion)
+
         btn_logo.setOnClickListener{
             loadFragment(home)
         }
+
+        btn_agregar_publicacion.setOnClickListener{
+            loadFragment(agrega_publicacion)
+        }
+
         return myFragmentView
     }
 

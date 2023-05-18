@@ -1,10 +1,13 @@
 package lopez.marco.pruebabottomnav
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import com.google.firebase.auth.FirebaseAuth
 import lopez.marco.proyectoeterem.FragmentInicio
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,9 +40,19 @@ class FragmentOpciones : Fragment() {
         var inicio = FragmentInicio()
         val myFragmentView: View? = inflater.inflate(R.layout.fragment_opciones, container, false)
         val btn_volver: View = myFragmentView!!.findViewById(R.id.btn_opciones_volver)
+        val btn_cerrar_sesion: Button = myFragmentView!!.findViewById(R.id.btn_cerrar_sesion)
+
+        val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
         btn_volver.setOnClickListener{
             loadFragment(inicio)
+        }
+
+        btn_cerrar_sesion.setOnClickListener{
+            auth.signOut()
+            val intent = Intent(requireContext(), ActivityInicioSesion::class.java)
+            startActivity(intent)
+            requireActivity().finish()
         }
 
         return myFragmentView
@@ -70,5 +83,7 @@ class FragmentOpciones : Fragment() {
         transaction.replace(R.id.frame_container, fragment)
         transaction.commit()
     }
+
+
 
 }

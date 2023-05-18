@@ -1,3 +1,7 @@
 package lopez.marco.pruebabottomnav
 
-data class Lugar(var nombre:String, var descripcion: String, var precio: String, var valoracion: String, var ubicacion: String)
+import android.media.Image
+import android.net.Uri
+
+data class Lugar(val nombre:String, val descripcion: String, val precio: String, val valoracion: String, val ubicacion: String,
+                 val imagen:String?=null)
